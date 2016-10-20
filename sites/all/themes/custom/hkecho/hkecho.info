@@ -1,0 +1,11 @@
+name = Hk Echo
+description = Sub Theme of stark
+package = Healthkart
+version = VERSION
+core = 7.x
+
+
+stylesheets[all][] = css/bootstrap.css
+stylesheets[all][] = css/font-awesome.css
+stylesheets[all][] = css/jquery.mCustomScrollbar.css
+stylesheets[all][] = css/styles.css

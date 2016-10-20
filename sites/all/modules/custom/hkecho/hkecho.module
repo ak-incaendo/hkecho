@@ -1,10 +1,20 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+/**
+ * Implements hook_menu()
  */
+function hkecho_menu(){
+  $items = [];
+  
+  $items['hkecho'] = array(
+      'title' => t(''),
+      'page callback' => 'hkecho_page',
+      'access callback' => TRUE,
+  );
+  
+  return $items;
+}
 
 /**
  * Implements hook_cronapi().
@@ -21,4 +31,26 @@ function hkecho_cronapi($op, $job = NULL) {
   );
   return $items;
 
+}
+
+/*
+ * Just for fun
+ */
+function hkecho_page(){
+  return theme("hkecho");
+}
+
+
+
+/**
+ * Implements hook_theme().
+ */
+function hkecho_theme($existing, $type, $theme, $path) {
+  
+  return array(
+      'hkecho' => array(
+          'template' => 'hkecho',
+          'path' => $path . '/templates',
+      ),
+  );
 }

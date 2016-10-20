@@ -1,0 +1,5 @@
+name = HKecho API
+description = Hkecho Api
+core = 7.x
+package = HealthKart
+dependencies[] = services

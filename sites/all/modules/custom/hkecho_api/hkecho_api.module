@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * Implements hook_services_resources()
+ */
+function hkecho_api_services_resources() {
+  return array(
+         'list' => array(
+         'retrieve' => array(
+           'help' => 'Retrieves a note',
+           'file' => array('type' => 'inc', 'module' => 'hkecho_api', 'name' => 'resources/hkecho_api.callbacks'),
+           'callback' => '_get_details',
+           'access callback' => '_user_rating_access',
+           'args' => array(
+             array(
+               'name' => 'id',
+               'type' => 'int',
+               'description' => 'The id of the note to get',
+               'source' => array('path' => '0'),
+               'optional' => true,
+             ),
+           ),
+         ),   
+        )
+      );
+}
+
+function _user_rating_access(){
+    return TRUE;
+}
+function p($a){
+  echo "<pre>";
+  print_r($a);
+  echo "</pre>";
+  die();
+}

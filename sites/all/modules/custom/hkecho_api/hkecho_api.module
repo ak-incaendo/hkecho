@@ -6,22 +6,39 @@
 function hkecho_api_services_resources() {
   return array(
          'list' => array(
-         'retrieve' => array(
-           'help' => 'Retrieves a note',
-           'file' => array('type' => 'inc', 'module' => 'hkecho_api', 'name' => 'resources/hkecho_api.callbacks'),
-           'callback' => '_get_details',
-           'access callback' => '_user_rating_access',
-           'args' => array(
-             array(
-               'name' => 'id',
-               'type' => 'int',
-               'description' => 'The id of the note to get',
-               'source' => array('path' => '0'),
-               'optional' => true,
-             ),
-           ),
-         ),   
-        )
+            'retrieve' => array(
+              'help' => 'Retrieves a note',
+              'file' => array('type' => 'inc', 'module' => 'hkecho_api', 'name' => 'resources/hkecho_api.callbacks'),
+              'callback' => '_get_details',
+              'access callback' => '_user_rating_access',
+              'args' => array(
+                array(
+                  'name' => 'id',
+                  'type' => 'int',
+                  'description' => 'The id of the note to get',
+                  'source' => array('path' => '0'),
+                  'optional' => true,
+                ),
+              ),
+            ),
+         ),
+          'save' => array(
+                'create' => array(
+                    'help' => 'Save data in different departments',
+                    'file' => array('type' => 'inc', 'module' => 'hkecho_api', 'name' => 'resources/hkecho_api.callbacks'),
+                    'callback' => '_insert_data',
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Information Object',
+                            'source' => 'data',
+                            'optional' => FALSE,
+                        ),
+                    ),
+                    'access callback' => '_user_rating_access',
+                ),
+            ),
       );
 }
 

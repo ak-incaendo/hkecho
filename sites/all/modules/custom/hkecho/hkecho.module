@@ -1,0 +1,24 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Implements hook_cronapi().
+ */
+function hkecho_cronapi($op, $job = NULL) {
+  $items = array();
+
+  $items['birthdate_and_joiningdate'] = array(
+      'description' => 'Get birthdate and joining date from hknext',
+      'rule' => '0 0 1 * *',
+      'callback' => 'hkecho_save_dates',
+      'file' => 'includes/hkecho.cron.inc', // External file, like hook_menu
+      'file path' => drupal_get_path('module', 'hkecho')
+  );
+  return $items;
+
+}

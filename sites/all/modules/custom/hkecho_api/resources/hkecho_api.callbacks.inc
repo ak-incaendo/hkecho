@@ -59,3 +59,27 @@ function _insert_data($data) {
   }
   return $msg;
 }
+
+/**
+ * function to save hktweets
+ */
+function _save_tweet($tweet) {
+  $node = new stdClass();
+  $node->type = 'hk_tweet';
+  node_object_prepare($node);
+  $node->uid = 0;
+  $node->title  = $tweet['title'];
+  $node->language = LANGUAGE_NONE;
+  $node->field_name['und'][0]['value'] = $tweet['name'];
+  //p($node);
+  $node = node_submit($node);
+  try {
+     node_save($node);
+     $msg = 1;
+  }
+  catch (Exception $e) {
+    print $e;
+    $msg = 0;
+  }
+  return $msg;
+}

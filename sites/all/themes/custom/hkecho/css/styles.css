@@ -16,7 +16,11 @@ a:active,a:focus{outline:0!important;}
 a:focus,a:active {outline: 0;}
 /*------------End Default CSS----------*/
 
-
+@media all and  (min-width:1300px)
+{
+	.full_wrapper  .right_side .main_heading:before{width:23%;}
+	.full_wrapper  .right_side .main_heading:after{width:23%;}
+}
 
 .middle_content{background-color:#fff;height:525px;width:94.6%;margin:128px auto auto;position:relative;box-shadow:0 3px 8px rgba(0, 0, 0, 0.1);background-image:url('../images/bg.png');background-repeat:no-repeat;background-position:right center;border-radius:4px;padding:0 20px;}
 .slider{width:100%;float:left;border-bottom: 4px solid #63c3b5;}
@@ -397,6 +401,7 @@ a:focus,a:active {outline: 0;}
 .max-width-example .content{ height: auto;width: auto;max-width: 50%;min-width: 600px;display: inline-block;vertical-align: bottom;}
 .max-width-example .content ul{max-height: 135px;overflow-y: hidden;}
 .middle_wrapper{width:100%;float:left;margin:-34px 0 0;}
-.hktweets_div .content {
-    height: 179px;
-}
+.middle_wrapper ul li{list-style:none;}
+.events_div.event_list1   .evnts_repeat{border-bottom:1px solid #e8e8e8;padding-bottom:10px;}
+.hktweets_div    .repeat_list{border-bottom:1px solid #e8e8e8!important;padding-bottom:10px;}
+#user_say{width:100%;float:left;}

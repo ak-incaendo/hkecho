@@ -1,3 +1,6 @@
+<?php 
+$dates = _get_dates();
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
@@ -85,20 +88,17 @@
                         <div class="events_list">
                             <div id="content3-1" class="content">
                                 <ul class="nt-example1" class="list-unstyled" >
-                                    <li>
-                                        <div class="evnts_repeat">
-                                            <label>Title</label>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and </p>
-                                            <a href="javascript:void(0);">Read More</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="evnts_repeat">
-                                            <label>Title</label>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and  </p>
-                                            <a href="javascript:void(0);">Read More</a>
-                                        </div>
-                                    </li>
+                                    <?php $event_nodes = _get_echo_data('event', FALSE);
+                                    foreach ($event_nodes as $event) {
+                                      ?>
+                                      <li>
+                                          <div class="evnts_repeat">
+                                              <label><?php print $event->title ?></label>
+                                              <p><?php print $event->body['und'][0]['value']; ?> </p>
+                                              <a href="javascript:void(0);">Read More</a>
+                                          </div>
+                                      </li>
+<?php } ?>
                                 </ul>
                             </div>
                         </div>
@@ -114,34 +114,16 @@
                         </div>
                         <div class="events_list">
                             <div id="content4-1" class="content">
-                                <div class="evnts_repeat">
-                                    <label>Date: 23.10.2012</label>
-                                    <ul class="list-inline list-unstyled">
-                                        <li>Sunday</li>
-                                        <li>Gurgaon</li>
-                                    </ul>
-                                </div>
-                                <div class="evnts_repeat">
-                                    <label>Date: 23.10.2012</label>
-                                    <ul class="list-inline list-unstyled">
-                                        <li>Sunday</li>
-                                        <li>Gurgaon</li>
-                                    </ul>
-                                </div>
-                                <div class="evnts_repeat">
-                                    <label>Date: 23.10.2012</label>
-                                    <ul class="list-inline list-unstyled">
-                                        <li>Sunday</li>
-                                        <li>Gurgaon</li>
-                                    </ul>
-                                </div>
-                                <div class="evnts_repeat">
-                                    <label>Date: 23.10.2012</label>
-                                    <ul class="list-inline list-unstyled">
-                                        <li>Sunday</li>
-                                        <li>Gurgaon</li>
-                                    </ul>
-                                </div>
+                                <?php $holiday_nodes = _get_echo_data('holiday', FALSE);
+                                foreach ($holiday_nodes as $holiday) {
+                                  ?>
+                                      <div class="evnts_repeat">
+                                          <label>Date: <?php print $holiday->field_date['und'][0]['value'] .' ('. $holiday->title .')';?></label>
+                                          <ul class="list-inline list-unstyled">
+                                              <li><?php print $holiday->field_location['und'][0]['value'];?></li>
+                                          </ul>
+                                      </div>
+                                  <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -157,27 +139,20 @@
                         <div class="events_list">
                             <div class="birthday_list">
                                 <div id="content-1" class="content">
-                                    <div class="repeat_list">
-                                        <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                        <div class="bithdy_text">
-                                            <label><span class="name_Text">sandeep soni</span> </label>
-                                            <span class="hktweets">- Sandeep</span>
-                                        </div>
-                                    </div>
-                                    <div class="repeat_list">
-                                        <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                        <div class="bithdy_text">
-                                            <label><span class="name_Text">sandeep soni</span> </label>
-                                            <span class="hktweets">- Sandeep</span>
-                                        </div>
-                                    </div>
-                                    <div class="repeat_list">
-                                        <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                        <div class="bithdy_text">
-                                            <label><span class="name_Text">sandeep soni</span> </label>
-                                            <span class="hktweets">- Sandeep</span>
-                                        </div>
-                                    </div>
+                                    <ul class="nt-example1" class="list-unstyled" >
+                                        <?php $hk_tweets  = _get_tweets();
+                                        foreach($hk_tweets as $tweet) { ?>
+                                        <li>
+                                            <div class="repeat_list">
+                                                <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
+                                                <div class="bithdy_text">
+                                                    <label><span class="name_Text"><?php print $tweet->title;?></span> </label>
+                                                    <span class="hktweets">- <?php print $tweet->field_name['und'][0]['value'];?></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                         <?php  } ?>
+                                    </ul>
                                 </div>
                             </div>
 
@@ -187,51 +162,19 @@
                 <div class="col-md-12 col-sm-12 col-xs-6">
                     <div class="new_jin">
                         <div class="main_heading">
-                            <h2>New joinee</h2>
+                            <h2>New joinees</h2>
                         </div>
                         <div id="user_say" class="owl-carousel">
+                          <?php $new_joinee_nodes = _get_echo_data('new joinee', FALSE);
+                          foreach($new_joinee_nodes as $joinee) {
+                            $depart = taxonomy_term_load($joinee->field_department['und'][0]['tid']);?>
                             <div class="item">
                                 <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                <label>Tarsem</label></br>
-                                <span>Deparment: IT</span>
-                                <p>Success is a lousy teacher. It seduces smart people</p>
+                                <label><?php print $joinee->title;?></label></br>
+                                <span>Deparment: <?php print $depart->name;?></span>
+                                <p><?php print $joinee->body['und'][0]['value']; ?></p>
                             </div>
-                            <div class="item">
-                                <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                <label>Tarsem</label></br>
-                                <span>Deparment: IT</span>
-                                <p>Success is a lousy teacher. It seduces smart people</p>
-                            </div>
-                            <div class="item">
-                                <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                <label>Tarsem</label></br>
-                                <span>Deparment: IT</span>
-                                <p>Success is a lousy teacher. It seduces smart people</p>
-                            </div>
-                            <div class="item">
-                                <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                <label>Tarsem</label></br>
-                                <span>Deparment: IT</span>
-                                <p>Success is a lousy teacher. It seduces smart people</p>
-                            </div>
-                            <div class="item">
-                                <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                <label>Tarsem</label></br>
-                                <span>Deparment: IT</span>
-                                <p>Success is a lousy teacher. It seduces smart people</p>
-                            </div>
-                            <div class="item">
-                                <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                                <label>Tarsem</label></br>
-                                <span>Deparment: IT</span>
-                                <p>Success is a lousy teacher. It seduces smart people</p>
-                            </div>
-                            <div class="item">
-                                <img src="images/img.jpg"/>
-                                <label>Tarsem</label></br>
-                                <span>Deparment: IT</span>
-                                <p>Success is a lousy teacher. It seduces smart people</p>
-                            </div>
+                            <?php  } ?>
                         </div>
                     </div>
                 </div>
@@ -255,32 +198,21 @@
                 <i class="fa fa-birthday-cake"></i></br>
             </div>
             <div class="main_heading">
-                <h2>Upcoming Birthdays</h2>
+                <h2>Today's Birthdays</h2>
             </div>
             <div class="birthday_list">
-                <div id="content1-1" class="content">
+                <div id="content2-1" class="content">
+                  <?php foreach($dates as $bdate) {
+                    if($bdate->birth_date == date('d-m-Y',time())) { ?>
                     <div class="repeat_list">
                         <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
                         <div class="bithdy_text">
-                            <label><span class="name_Text">sandeep</span> <span class="on">on</span> <span class="date_text">june 12</span> </label>
-                            <span class="deparment_text">Deparment: IT</span>
+                            <label><span class="name_Text"><?php print $bdate->name;?></span> <span class="on">on</span> <span class="date_text"><?php print $bdate->birth_date;?></span> </label>
+                            <span class="deparment_text">Deparment: <?php print $bdate->department;?></span>
                         </div>
-                    </div>
-                    <div class="repeat_list">
-                        <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                        <div class="bithdy_text">
-                            <label><span class="name_Text">sandeep</span> <span class="on">on</span> <span class="date_text">june 12</span> </label>
-                            <span class="deparment_text">Deparment: IT</span>
-                        </div>
-                    </div>
-                    <div class="repeat_list">
-                        <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                        <div class="bithdy_text">
-                            <label><span class="name_Text">sandeep</span> <span class="on">on</span> <span class="date_text">june 12</span> </label>
-                            <span class="deparment_text">Deparment: IT</span>
-                        </div>
-                    </div>
-
+                    </div>           
+                    <?php }
+                    }?>
                 </div>
             </div>
         </div>
@@ -289,39 +221,21 @@
                 <i class="fa fa-heart" aria-hidden="true"></i>
             </div>
             <div class="main_heading">
-                <h2>Upcoming Anniversary</h2>
+                <h2>Today's Anniversary</h2>
             </div>
             <div class="birthday_list">	
-                <div id="content2-1" class="content">
+                <div id="content23-1" class="content">
+                  <?php foreach($dates as $bdate) {
+                    if($bdate->joining_date == date('d-m-Y',time())) { ?>
                     <div class="repeat_list">
                         <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
                         <div class="bithdy_text">
-                            <label><span class="name_Text">sandeep</span> <span class="on">on</span> <span class="date_text">june 12</span> </label>
-                            <span class="deparment_text">Deparment: IT</span>
+                            <label><span class="name_Text"><?php print $bdate->name;?></span> <span class="on">on</span> <span class="date_text"><?php print $bdate->joining_date;?></span> </label>
+                            <span class="deparment_text">Deparment: <?php print $bdate->department;?></span>
                         </div>
-                    </div>
-                    <div class="repeat_list">
-                        <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                        <div class="bithdy_text">
-                            <label><span class="name_Text">sandeep</span> <span class="on">on</span> <span class="date_text">june 12</span> </label>
-                            <span class="deparment_text">Deparment: IT</span>
-                        </div>
-                    </div>
-                    <div class="repeat_list">
-                        <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                        <div class="bithdy_text">
-                            <label><span class="name_Text">sandeep</span> <span class="on">on</span> <span class="date_text">june 12</span> </label>
-                            <span class="deparment_text">Deparment: IT</span>
-                        </div>
-                    </div>
-                    <div class="repeat_list">
-                        <img src="sites/all/themes/custom/hkecho/images/img.jpg"/>
-                        <div class="bithdy_text">
-                            <label><span class="name_Text">sandeep</span> <span class="on">on</span> <span class="date_text">june 12</span> </label>
-                            <span class="deparment_text">Deparment: IT</span>
-                        </div>
-                    </div>
-
+                    </div>           
+                    <?php }
+                    }?>
                 </div>
             </div>
         </div>
@@ -394,6 +308,42 @@
   (function ($) {
       $(window).on("load", function () {
 
+          $("#content1-1").mCustomScrollbar({
+              autoHideScrollbar: true,
+              theme: "rounded"
+          });
+
+      });
+  })(jQuery);
+</script>
+<script>
+  (function ($) {
+      $(window).on("load", function () {
+
+          $("#content1-1").mCustomScrollbar({
+              autoHideScrollbar: true,
+              theme: "rounded"
+          });
+
+      });
+  })(jQuery);
+</script>
+<script>
+  (function ($) {
+      $(window).on("load", function () {
+
+          $("#content4-1").mCustomScrollbar({
+              autoHideScrollbar: true,
+              theme: "rounded"
+          });
+
+      });
+  })(jQuery);
+</script>
+<script>
+  (function ($) {
+      $(window).on("load", function () {
+
           $("#content2-1").mCustomScrollbar({
               autoHideScrollbar: true,
               theme: "rounded"
@@ -418,7 +368,19 @@
   (function ($) {
       $(window).on("load", function () {
 
-          $("#content4-1").mCustomScrollbar({
+          $("#content3-1").mCustomScrollbar({
+              autoHideScrollbar: true,
+              theme: "rounded"
+          });
+
+      });
+  })(jQuery);
+</script>
+<script>
+  (function ($) {
+      $(window).on("load", function () {
+
+          $("#content23-1").mCustomScrollbar({
               autoHideScrollbar: true,
               theme: "rounded"
           });
@@ -434,6 +396,7 @@
           // itemsDesktop : [1300,2],
           lazyLoad: false,
           pagination: false,
+          autoPlay: true,
           navigation: false,
       });
 

@@ -70,8 +70,7 @@ function _save_tweet($tweet) {
   $node->uid = 0;
   $node->title  = $tweet['title'];
   $node->language = LANGUAGE_NONE;
-  $node->field_name['und'][0]['value'] = $tweet['Name'];
-  //p($node);
+  $node->field_name['und'][0]['value'] = $tweet['name'];
   $node = node_submit($node);
   try {
      node_save($node);
